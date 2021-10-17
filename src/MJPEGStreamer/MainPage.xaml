@@ -1,0 +1,221 @@
+﻿<Page
+    x:Class="MJPEGStreamer.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:MJPEGStreamer"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d" Loaded="Page_Loaded">
+    <!--xmlns:media="http://schemas.microsoft.com/winfx/2006/xaml/presentation"-->
+    <!-- https://msdn.microsoft.com/en-us/library/windows/apps/mt299109.aspx  button template-->
+
+    <Page.Resources>
+        <!-- Default style for Windows.UI.Xaml.Controls.Button -->
+        <Style TargetType="Button">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="Foreground" Value="LightGray" />
+            <Setter Property="BorderBrush" Value="{ThemeResource SystemControlForegroundTransparentBrush}" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="Padding" Value="8,4,8,4" />
+            <Setter Property="HorizontalAlignment" Value="Left" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="FontFamily" Value="{ThemeResource ContentControlThemeFontFamily}" />
+            <Setter Property="FontWeight" Value="Normal" />
+            <Setter Property="FontSize" Value="{ThemeResource ControlContentThemeFontSize}" />
+            <Setter Property="UseSystemFocusVisuals" Value="True" />
+            <Setter Property="Margin" Value="10,10"/>
+            <Setter Property="MinWidth" Value="25"/>
+            <Setter Property="MinHeight" Value="25"/>
+
+
+           <!--  <Setter Property="Margin" Value="10,10"/>
+            <Setter Property="MinWidth" Value="25"/>
+            <Setter Property="MinHeight" Value="25"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="RenderTransformOrigin" Value="0.5,0.5"/>
+            <Setter Property="BorderBrush" Value="Transparent" />
+            <Setter Property="FocusVisualPrimaryBrush" Value="{x:Null}" />
+            <Setter Property="FocusVisualSecondaryBrush" Value="{x:Null}" /> -->
+
+
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Grid x:Name="RootGrid" Background="{TemplateBinding Background}">
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="CommonStates">
+                                    <VisualState x:Name="Normal">
+                                        <Storyboard>
+                                            <PointerUpThemeAnimation Storyboard.TargetName="RootGrid" />
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="PointerOver">
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter"
+                                                   Storyboard.TargetProperty="BorderBrush">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlHighlightBaseMediumLowBrush}" />
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter"
+                                                   Storyboard.TargetProperty="Foreground">
+                                                
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="White" />
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <PointerUpThemeAnimation Storyboard.TargetName="RootGrid" />
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="Pressed">
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RootGrid"
+                                                   Storyboard.TargetProperty="Background">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlBackgroundBaseMediumLowBrush}" />
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter"
+                                                   Storyboard.TargetProperty="BorderBrush">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlHighlightTransparentBrush}" />
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter"
+                                                   Storyboard.TargetProperty="Foreground">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlHighlightBaseHighBrush}" />
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <PointerDownThemeAnimation Storyboard.TargetName="RootGrid" />
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="Disabled">
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RootGrid"
+                                                   Storyboard.TargetProperty="Background">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlBackgroundBaseLowBrush}" />
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter"
+                                                   Storyboard.TargetProperty="Foreground">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlDisabledBaseMediumLowBrush}" />
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter"
+                                                   Storyboard.TargetProperty="BorderBrush">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlDisabledTransparentBrush}" />
+                                            </ObjectAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                            <ContentPresenter x:Name="ContentPresenter"
+                          BorderBrush="{TemplateBinding BorderBrush}"
+                          BorderThickness="{TemplateBinding BorderThickness}"
+                          Content="{TemplateBinding Content}"
+                          ContentTransitions="{TemplateBinding ContentTransitions}"
+                          ContentTemplate="{TemplateBinding ContentTemplate}"
+                          Padding="{TemplateBinding Padding}"
+                          HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                          VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                          AutomationProperties.AccessibilityView="Raw"/>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+    </Page.Resources>
+
+    <Grid x:Name="MJPEGStreamerGrid" Tapped="VideoPaneGrid_Tapped">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition x:Name="ColumnSettings" Width="200"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Image x:Name="imageElement" Grid.Column="0" RenderTransformOrigin="0.5,0.5" DoubleTapped="imageElement_DoubleTapped" >
+            <Image.RenderTransform>
+                <CompositeTransform x:Name="imageElementRotation" />
+            </Image.RenderTransform>
+        </Image>
+
+        <TextBlock IsTextSelectionEnabled="True" Canvas.ZIndex="100" Text="..." x:Name="StreamingIPTextBox" Foreground="DodgerBlue" Visibility="Visible" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,5,0,0" Grid.Row="1" MinHeight="32" />
+        <TextBlock IsTextSelectionEnabled="True" Canvas.ZIndex="100" Text="..." x:Name="StreamingStatusTextBox" Foreground="DodgerBlue" Visibility="Visible" HorizontalAlignment="Center" VerticalAlignment="Center" DoubleTapped="imageElement_DoubleTapped" Margin="0,5,0,10" Grid.Row="2" MinHeight="32" />
+ 
+        <ContentDialog x:Name="ImportantNotesContentDialog" Visibility="Collapsed" CloseButtonText="Close">
+            <StackPanel>
+                <!-- <TextBlock Style="{ThemeResource BaseTextBlockStyle}" Foreground="DarkRed" Text="Note: (1) minimizing this app will stop streaming JPEG data. (2) Localhost loopback will not work! You can only access this HTTP service from a remote computer due to Universal Windows App restrictions." Margin="0,0,0,12" /> -->
+                <TextBlock IsTextSelectionEnabled="True" x:Name="ImportantNotesTextBlock" Style="{ThemeResource BaseTextBlockStyle}"  Text="Note: (1) minimizing this app will stop streaming JPEG data. (2) Localhost loopback will not work! You can only access this HTTP service from a remote computer due to Universal Windows App restrictions." Margin="0,0,0,12" />
+            </StackPanel>
+        </ContentDialog>
+
+        <!-- Capture + Record buttons -->
+        <StackPanel HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,10,0,10" Grid.Column="0"  >
+
+            <Button Name="StreamingButton" Click="StreamingButton_ClickAsync" IsEnabled="True"  >
+                
+                <!--<Grid>
+                    <Ellipse x:Name="StartRecordingIcon" Fill="Red" Width="20" Height="20"/>
+                    <Rectangle x:Name="StopRecordingIcon" Fill="White" Width="20" Height="20" Visibility="Collapsed"/>
+                </Grid>-->
+                <Viewbox MaxHeight="25" MaxWidth="25" >
+                    <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE93E;"/>
+                </Viewbox>
+
+            </Button>
+
+            <Button Name="RotationButton" IsEnabled="True" Click="RotationButton_Clicked">
+                <Viewbox MaxHeight="25" MaxWidth="25">
+                    <SymbolIcon Symbol="RotateCamera"/>
+                </Viewbox>
+            </Button>
+
+            <Button Name="WebcamButton" IsEnabled="True" VerticalAlignment="Top" Click="WebcamButton_ClickedAsync" >
+                <Grid>
+                    <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE960;" />
+                    <FontIcon Name="NoWebCamErrorIcon" FontFamily="Segoe MDL2 Assets" Glyph="&#xED2E;" Foreground="Red" FocusVisualPrimaryBrush="Red" FontWeight="Bold"/>
+                    <!-- <SymbolIcon Symbol="SignalError" IsEnabled="False"/>   -->
+                    
+                </Grid>
+            </Button>
+
+
+
+
+            <Button Name="CaptureImageButton" Height="40" Width="40" IsEnabled="True" Click="CaptureImage_Clicked" >
+                <Viewbox MaxHeight="40" MaxWidth="40">
+                    <SymbolIcon Symbol="Camera"/>
+                </Viewbox>
+            </Button>
+
+            
+            <Button Name="SettingsButton" Height="40" Width="40" IsEnabled="True" Click="SettingsButton_Clicked" >
+                <Viewbox MaxHeight="40" MaxWidth="40">
+                    <SymbolIcon Symbol="Setting"/>
+                </Viewbox>
+            </Button>
+        
+
+        </StackPanel>
+        <ScrollViewer  Grid.Column="1">
+            <StackPanel Margin="0,0,0,0" Padding="10,10,10,10">
+                <TextBlock Text="Settings" FontSize="18"  Margin="0,0,0,20" />
+                <TextBox x:Name="TextBoxPort" Header="HTTP server port" Text=""  InputScope="Number" TextChanging="TextBoxPassword_TextChanging" MaxLength="5" PlaceholderText="8000" LostFocus="TextBoxPort_LostFocusAsync" />
+                <TextBox x:Name="TextBoxPassword"  TextChanged="TextBoxPassword_TextChanged" TextChanging="TextBoxPassword_TextChanging" Header="Password (?pass=**)" PlaceholderText=""/>
+                <TextBlock Text="MJPEG image quality" Margin="0,10,0,0"></TextBlock>
+                <Slider x:Name="ImageQualitySlider" TickFrequency="10" TickPlacement="Outside" Maximum="100" StepFrequency="5" SmallChange="1" LargeChange="5" Value="50" LostFocus="ImageQualitySlider_LostFocus" ValueChanged="ImageQualitySlider_ValueChanged" />
+                <TextBlock Text="Frame rate" Margin="0,0,0,0"></TextBlock>
+                <Slider x:Name="FrameRateSlider" TickFrequency="10" TickPlacement="Outside" Minimum="1" Maximum="30" StepFrequency="1" SmallChange="1" LargeChange="1" Value="5" LostFocus="FrameRateSlider_LostFocus" ValueChanged="FrameRateSlider_ValueChanged" ></Slider>
+                <ToggleSwitch x:Name="PreviewToggleSwitch" Header="Preview" OffContent="save CPU cycles" OnContent="see what you get" Toggled="PreviewToggleSwitch_Toggled" />
+                <ComboBox x:Name="CameraComboBox" Header="Camera" SelectionChanged="CameraComboBox_SelectionChanged" LostFocus="CameraComboBox_LostFocus" DropDownOpened="CameraComboBox_DropDownOpened" HorizontalAlignment="Stretch" />
+                <ComboBox x:Name="CameraFormatBox" Header="Format" SelectionChanged="CameraFormatBox_SelectionChanged" HorizontalAlignment="Stretch" Margin="0,5,0,0" VerticalAlignment="Stretch"/>
+                <ComboBox x:Name="CameraResolutionBox" Header="Resolution" SelectionChanged="CameraResolution_SelectionChanged" LostFocus="CameraComboBox_LostFocus" DropDownOpened="CameraResolution_DropDownOpened" HorizontalAlignment="Stretch" Margin="0,5,0,0" VerticalAlignment="Center" />
+                <!-- <TextBlock TextWrapping="WrapWholeWords" Text="Note: minimizing this app as well as the screen-saver will stop streaming JPEG data. It is recommended to not enter sleep mode when on power as well as not start the screen saver when on power. WARNING: you can only access this app from a remote computer. Localhost loopback will not work!" Foreground="DarkRed" VerticalAlignment="Bottom" FontSize="10" Margin="10,10,10,10"></TextBlock>-->
+                <HyperlinkButton x:Name="ImportantNotesButton" Content="Important notes..."  Foreground="DarkRed" Margin="10,25,10,0" Click="ImportantNotesButton_ClickedAsync" >
+                </HyperlinkButton>
+                <HyperlinkButton x:Name="AboutNotesButton" Content="About"  Foreground="DarkRed" Margin="10,0,10,0" Click="AboutNotesButton_ClickedAsync" >
+                </HyperlinkButton>
+                <HyperlinkButton Content="GitHub"  Foreground="DarkRed" Margin="10,0,10,10" NavigateUri="https://github.com/flyinggorilla/MJPEG-Streamer-Universal-Windows-App">
+                </HyperlinkButton>
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+
+
+    <!-- SignalError -->
+</Page>

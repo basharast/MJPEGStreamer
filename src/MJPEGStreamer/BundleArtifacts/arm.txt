@@ -1,0 +1,5 @@
+MainPackage=B:\MJPEG-Streamer-Universal-Windows-App\MJPEGStreamer\bin\ARM\Release\MJPEGStreamer_1.1.12.0_ARM.appx
+ResourcePack=B:\MJPEG-Streamer-Universal-Windows-App\MJPEGStreamer\bin\ARM\Release\MJPEGStreamer_1.1.12.0_scale-100.appx
+ResourcePack=B:\MJPEG-Streamer-Universal-Windows-App\MJPEGStreamer\bin\ARM\Release\MJPEGStreamer_1.1.12.0_scale-125.appx
+ResourcePack=B:\MJPEG-Streamer-Universal-Windows-App\MJPEGStreamer\bin\ARM\Release\MJPEGStreamer_1.1.12.0_scale-150.appx
+ResourcePack=B:\MJPEG-Streamer-Universal-Windows-App\MJPEGStreamer\bin\ARM\Release\MJPEGStreamer_1.1.12.0_scale-400.appx
