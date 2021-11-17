@@ -1,1 +1,1 @@
-MainPackage=B:\MJPEG-Streamer-Universal-Windows-App\MJPEGStreamer\bin\x86\Release\MJPEGStreamer_1.1.12.0_x86.appx
+MainPackage=B:\MJPEG-Streamer-Universal-Windows-App\MJPEGStreamer\bin\x86\Release\MJPEGStreamer_1.1.20.0_x86.appx

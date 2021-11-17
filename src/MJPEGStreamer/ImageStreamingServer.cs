@@ -26,7 +26,7 @@ namespace MJPEGStreamer
 
         async public Task StartServer()
         {
-            if (_isServerStarted)
+            if (_isServerStarted || !Helpers.CheckInternetConnection())
             {
                 //Debug.WriteLine("Webserver already running.");
                 return;

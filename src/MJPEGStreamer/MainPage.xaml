@@ -210,7 +210,7 @@
                 </HyperlinkButton>
                 <HyperlinkButton x:Name="AboutNotesButton" Content="About"  Foreground="DarkRed" Margin="10,0,10,0" Click="AboutNotesButton_ClickedAsync" >
                 </HyperlinkButton>
-                <HyperlinkButton Content="GitHub"  Foreground="DarkRed" Margin="10,0,10,10" NavigateUri="https://github.com/flyinggorilla/MJPEG-Streamer-Universal-Windows-App">
+                <HyperlinkButton Content="GitHub"  Foreground="DarkRed" Margin="10,0,10,10" NavigateUri="https://github.com/basharast/MJPEGStreamer">
                 </HyperlinkButton>
             </StackPanel>
         </ScrollViewer>

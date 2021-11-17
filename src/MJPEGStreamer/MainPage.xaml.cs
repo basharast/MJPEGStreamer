@@ -252,7 +252,6 @@ namespace MJPEGStreamer
                 PreviewToggleSwitch.IsOn = _previewVideoEnabled;
                 UpdatePreviewState();
 
-
                 _allVideoDevices = await DeviceInformation.FindAllAsync(DeviceClass.VideoCapture);
                 var id = _localSettings.Values["CurrentVideoDeviceId"];
                 if (id == null)
@@ -287,7 +286,6 @@ namespace MJPEGStreamer
                     }
 
                 }
-
                 await StartServer();
                 _mjpegStreamerIsInitializing = false;
             }
@@ -315,31 +313,38 @@ namespace MJPEGStreamer
 
         private void setIPInfo()
         {
-            var IP = GetFirstLocalIp();
-            if (IP.Length > 0)
+            try
             {
-                if (streamPassword.Length > 0)
+                var IP = GetFirstLocalIp();
+                if (IP.Length > 0)
                 {
-                    try
+                    if (streamPassword.Length > 0)
                     {
-                        StreamingIPTextBox.Text = $"http://{IP}:{TextBoxPort.Text}?pass={streamPassword}";
-                    }
-                    catch (Exception ex)
-                    {
+                        try
+                        {
+                            StreamingIPTextBox.Text = $"http://{IP}:{TextBoxPort.Text}?pass={streamPassword}";
+                        }
+                        catch (Exception ex)
+                        {
 
+                        }
+                    }
+                    else
+                    {
+                        try
+                        {
+                            StreamingIPTextBox.Text = $"http://{IP}:{TextBoxPort.Text}";
+                        }
+                        catch (Exception ex)
+                        {
+
+                        }
                     }
                 }
-                else
-                {
-                    try
-                    {
-                        StreamingIPTextBox.Text = $"http://{IP}:{TextBoxPort.Text}";
-                    }
-                    catch (Exception ex)
-                    {
+            }
+            catch (Exception ex)
+            {
 
-                    }
-                }
             }
         }
         private async void Window_VisibilityChanged(object sender, VisibilityChangedEventArgs args)
@@ -415,8 +420,6 @@ namespace MJPEGStreamer
                         _activityCounter = 0;
                     }
 
-                    else
-                        Debug.Write(".");
 
                     Interlocked.Exchange(ref _jpegStreamBuffer, jpegStream);
 
@@ -1144,6 +1147,10 @@ namespace MJPEGStreamer
         bool DialogInProgress = false;
         private async void ShowError(Exception ex)
         {
+            if (ex.Message.StartsWith("Arg_Null"))
+            {
+                return;
+            }
             while (DialogInProgress)
             {
                 await Task.Delay(1500);
@@ -1205,6 +1212,7 @@ namespace MJPEGStreamer
         {
             try
             {
+
                 if (_periodicTimerStreamingStatus != null)
                     _periodicTimerStreamingStatus.Cancel();
                 //Debug.WriteLine("UpdatePreviewState called - toggle: " + PreviewToggleSwitch.IsOn);
@@ -1231,6 +1239,11 @@ namespace MJPEGStreamer
                     await Dispatcher.RunAsync(CoreDispatcherPriority.High,
                         () =>
                         {
+                            if (!Helpers.CheckInternetConnection())
+                            {
+                                StreamingStatusTextBox.Text = "No network connection!";
+                            }
+                            else
                             {
                                 try
                                 {
@@ -1268,7 +1281,8 @@ namespace MJPEGStreamer
 
                 // the ip address
                 return hostname?.CanonicalName;
-            }catch(Exception ex)
+            }
+            catch (Exception ex)
             {
 
             }
@@ -1288,7 +1302,8 @@ namespace MJPEGStreamer
                         }
                     }
                 }
-            }catch(Exception e)
+            }
+            catch (Exception e)
             {
 
             }
